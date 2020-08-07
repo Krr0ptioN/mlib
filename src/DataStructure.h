@@ -5,8 +5,10 @@
 #ifdef __cplusplus
 	#include "DataStructure/Array.hpp"
 #else
-    #include "DataStrcture/String.h"
-	#include "DataStrcture/Array.h"
+	#define STRING_H_INCLUDED
+//	#include "DataStructure/String.h"
+	#define ARRAY_H_INCLUDED
+	#include "DataStructure/Array.h"
 #endif // __cplusplus
 
 #endif // COLLECTION_H

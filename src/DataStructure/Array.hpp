@@ -1,13 +1,13 @@
 
 #include <iostream>
-#include "CollectionBase.hpp"
+#include "Collection.hpp"
 
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
-typedef long int index_t;
-namespace mdata {
+
+namespace mlib {
 	template<typename T>
-	class array : public mdata::CollectionBase<T> {
+	class array : public mlib::Collection<T> {
 	private:
 		T* list;
 		index_t size = 0;
@@ -46,12 +46,12 @@ namespace mdata {
 }
 
 template<typename T>
-mdata::array<T>::array(index_t entr_size) : size(entr_size) {
+mlib::array<T>::array(index_t entr_size) : size(entr_size) {
 	list = new T[size];
 }
 
 template<typename T>
-mdata::array<T>::array(const array<T> &array2){
+mlib::array<T>::array(const array<T> &array2){
 	size = array2.getSize();
 	list = new T[size];
 	for(index_t i = 0; i < array2.length;i++)
@@ -59,17 +59,17 @@ mdata::array<T>::array(const array<T> &array2){
 }
 
 template<typename T>
-mdata::array<T>::~array(){
+mlib::array<T>::~array(){
 	delete[] list;
 }
 
 template<typename T>
-index_t mdata::array<T>::getSize(){
+index_t mlib::array<T>::getSize(){
 	return this->size;
 }
 
 template<typename T>
-inline T mdata::array<T>::get(index_t index){
+inline T mlib::array<T>::get(index_t index){
 	if(not(index >= length)){
 		if(index < 0) 
 			return list[length + index];
@@ -81,12 +81,12 @@ inline T mdata::array<T>::get(index_t index){
 }
 
 template<typename T>
-T mdata::array<T>::operator[](index_t index){
+T mlib::array<T>::operator[](index_t index){
 	return get(index);
 }
 
 template<typename T>
-void mdata::array<T>::append(T value){
+void mlib::array<T>::append(T value){
 	if (length >= size) {
 		resize(1);
 		list[length++] = value;
@@ -96,7 +96,7 @@ void mdata::array<T>::append(T value){
 }
 
 template<typename T>
-void mdata::array<T>::append(array& array2){
+void mlib::array<T>::append(array& array2){
 	index_t size2 = array2.getSize();
 	int append_size = size - size2;
 	append_size = abs(append_size);
@@ -108,7 +108,7 @@ void mdata::array<T>::append(array& array2){
 }
 
 template<typename T>
-void mdata::array<T>::resize(index_t add_size){
+void mlib::array<T>::resize(index_t add_size){
 	this->size += add_size;
 	if(add_size == 0)
 		return;
@@ -122,7 +122,7 @@ void mdata::array<T>::resize(index_t add_size){
 }
 
 template<typename T>
-void mdata::array<T>::insert(index_t index,T value){
+void mlib::array<T>::insert(index_t index,T value){
 	if(not(index >= size)){
 		resize(1);
 		for(index_t i = length;i > index;i--)
@@ -140,7 +140,7 @@ void mdata::array<T>::insert(index_t index,T value){
 }
 
 template<typename T>
-index_t mdata::array<T>::search(T value){
+index_t mlib::array<T>::search(T value){
 	index_t mid = (length - 1)/2;
 	if(list[mid] == value)
 		return mid;
@@ -156,7 +156,7 @@ index_t mdata::array<T>::search(T value){
 
 
 template<typename T>
-void mdata::array<T>::remove(index_t index){
+void mlib::array<T>::remove(index_t index){
         for(;index < length;index++){
 		list[index] = list[index + 1];
 	}
@@ -164,14 +164,14 @@ void mdata::array<T>::remove(index_t index){
 }
 
 template<typename T>
-inline void mdata::array<T>::swap(index_t index,index_t index2){
+inline void mlib::array<T>::swap(index_t index,index_t index2){
 	T tmp = list[index];
 	list[index] = list[index2];
 	list[index2] = tmp;
 }
 
 template<typename T>
-void mdata::array<T>::reverse(){
+void mlib::array<T>::reverse(){
 	index_t mid = (length - 1)/2;
 	for(index_t i = 0;i <= mid;i++)
 		swap(i,(length - (i+1)));
@@ -179,7 +179,7 @@ void mdata::array<T>::reverse(){
 
 
 template<typename T>
-void mdata::array<T>::print(){
+void mlib::array<T>::print(){
 	std::cout << "[ ";
 	for(index_t i = 0;i < length;i++)
 		std::cout << list[i]
@@ -187,7 +187,7 @@ void mdata::array<T>::print(){
 }
 
 template<typename T>
-void mdata::array<T>::shiftRight(){
+void mlib::array<T>::shiftRight(){
 	T tmp = get(-1);
 	for(unsigned int i = length;i > 0;i--)
 		list[i] = list[i - 1];
@@ -195,24 +195,24 @@ void mdata::array<T>::shiftRight(){
 }
 
 template<typename T>
-void mdata::array<T>::shiftLeft(){
+void mlib::array<T>::shiftLeft(){
 	T tmp = list[0];
 	for(unsigned int i = 0;i < length - 1;i++)
 		list[i] = list[i+1];
 	list[length-1] = tmp;
 }
 template<typename T>
-T mdata::array<T>::begin(){
+T mlib::array<T>::begin(){
 	return get(0);
 }
 
 template<typename T>
-inline T mdata::array<T>::end(){
+inline T mlib::array<T>::end(){
 	return get(-1);
 }
 
 template<typename T>
-inline void mdata::array<T>::strip(T value){
+inline void mlib::array<T>::strip(T value){
 	for(index_t i = 0; i < length;i++){
 		if(list[i] == value){
 			for(index_t j = i + 1;j < length;j++){
@@ -225,7 +225,7 @@ inline void mdata::array<T>::strip(T value){
 }
 
 template<typename T>
-inline void mdata::array<T>::freedup(){
+inline void mlib::array<T>::freedup(){
 	T end_value = end();
 	for(index_t i = 0;i < length;i++)
 		strip(list[i]);
@@ -233,7 +233,7 @@ inline void mdata::array<T>::freedup(){
 
 
 template<typename T>
-inline T mdata::array<T>::pop_front(){
+inline T mlib::array<T>::pop_front(){
 	T tmp = begin();
 	remove(length - 1);
 	return tmp;
@@ -241,19 +241,19 @@ inline T mdata::array<T>::pop_front(){
 
 
 template<typename T>
-inline T mdata::array<T>::pop_back(){
+inline T mlib::array<T>::pop_back(){
 	T tmp = end();
 	remove(0);
 	return tmp;
 }
 
 template<typename T>
-inline void mdata::array<T>::push_front(T value){
+inline void mlib::array<T>::push_front(T value){
 	insert(0,value);
 }
 
 template<typename T>
-inline void mdata::array<T>::push_back(T value){
+inline void mlib::array<T>::push_back(T value){
 	append(value);
 }
 
