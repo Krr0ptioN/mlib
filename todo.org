@@ -1,37 +1,52 @@
 
-* TODO Array
-** IN-PROGRESS Implement the Array methods
-   - [X] isEmpty
-   - [X] get
-   - [X] set
-   - [X] append
-   - [X] append_arr
-   - [X] search
-   - [X] remove
-   - [X] insert
-   - [X] swap
-   - [X] reverse
-   - [X] resize
-   - [-] print
-   - [X] Shift right
-   - [X] Shift left
-   - [ ] test the results
-*** IN-PROGRESS binary methodes
-   - [ ] merge
+* mlib
+** TODO Data structure
+*** TODO Array
+**** IN-PROGRESS Implement the Array methods
+     + [X] isEmpty
+     + [X] get
+     + [X] set
+     + [X] append
+     + [X] append_arr
+     + [X] search
+     + [X] remove
+     + [X] insert
+     + [X] swap
+     + [X] reverse
+     + [X] resize
+     + [-] print for clang
+     + [X] Shift right
+     + [X] Shift left
+     + [ ] Strip elements
+     + [ ] Free from duplicates
+     + [X] test the results
+*** TODO String
+**** method
+     + [ ] append string
+     + [ ] search char
+     + [ ] replace char
+     + [ ] search word
+     + [ ] replace word
+     + [ ] remove word
+     + [ ] remove char
+     + [ ] fill string
+     + [ ] reverse string
+     + [ ] insert word
+     + [ ] resize
+     + [ ] push back string
+     + [ ] pop back string
+     + [ ] push front string
+     + [ ] split
+     + [ ] pop front string
+**** format string
+*** TODO Linked List
+** TODO Exception and error handling
+** Scientific computation
+** Pwntools lib
+** Random
+** Process
+** System
+** I/O Operation
+** argv parser
 
-** IN-PROGRESS Method list add struct
-   - [X] isEmpty
-   - [X] get
-   - [X] set
-   - [X] append
-   - [X] append_arr
-   - [X] search
-   - [X] remove
-   - [X] insert
-   - [X] swap
-   - [X] reverse
-   - [X] print
-   - [X] Shift right
-   - [X] Shift left
-   - [ ] merge
 

@@ -1,18 +1,38 @@
-# mdata
-ADT Data Strcuture with Template simulation for Clang.
+# mlib
+General Perpose Library
 ## Documentation
 -----------------------
 ### Installation
+```sh
+make
+sudo make install
+```
 ### Usage
-* [Array](https://github.com/Krr0ptioN/mdata/blob/master/docs/Array.md)
+- Data Structure
+    * [Array](https://github.com/Krr0ptioN/mdata/blob/master/docs/Array.md)
+    * [List](https://github.com/Krr0ptioN/mdata/blob/master/docs/List.md)
+- Exception
+- Compution
+- Pwntools
+- Random
+- System
+- Process
+- I/O Operations
 
 ### TODO
 Data structure:
 - [ ] Linked List
-- [ ] Stack and Queue
+- [X] Stack and Queue operation
+Exception:
+Compution: 
+Pwntools:
+Random:
+System:
+Process:
+I/O Operations:
+
 
 Other:
-- [X] Polymorphism for C and C++
-- [X] Object oriented for C
+- [X] Object oriented for C Simulation with function pointer inside the `struct`
 - [ ] print method.
 - [ ] Test for memory corruption.
