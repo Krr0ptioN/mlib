@@ -1,5 +1,7 @@
 # mlib
 General Perpose Library
+=======
+General purpose library to avoiding DRY(Don't repeat yourself).
 ## Documentation
 -----------------------
 ### Installation
@@ -9,8 +11,8 @@ sudo make install
 ```
 ### Usage
 - Data Structure
-    * [Array](https://github.com/Krr0ptioN/mdata/blob/master/docs/Array.md)
-    * [List](https://github.com/Krr0ptioN/mdata/blob/master/docs/List.md)
+    * [Array](https://github.com/Krr0ptioN/mdata/blob/master/docs/DataStructure/Array.md)
+    * [List](https://github.com/Krr0ptioN/mdata/blob/master/docs/DatatStructure/List.md)
 - Exception
 - Compution
 - Pwntools
@@ -33,6 +35,6 @@ I/O Operations:
 
 
 Other:
-- [X] Object oriented for C Simulation with function pointer inside the `struct`
+- [X] Object oriented for C Simulation 
 - [ ] print method.
 - [ ] Test for memory corruption.
