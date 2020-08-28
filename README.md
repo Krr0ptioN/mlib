@@ -1,5 +1,5 @@
 # mdata
-ADT Data Strcuture with Template
+ADT Data Strcuture with Template simulation for Clang.
 ## Documentation
 -----------------------
 ### Installation
@@ -115,6 +115,10 @@ int main(){
 
 
 ### TODO
+Data structure:
+- [ ] Linked List
+- [ ] Stack and Queue
+other:
 - [ ] Polymorphism for C and C++
 - [ ] Object oriented for C
 - [ ] mdata_array_print method.
