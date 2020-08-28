@@ -175,6 +175,6 @@ Data structure:
 - [ ] Stack and Queue
 other:
 - [ ] Polymorphism for C and C++
-- [ ] Object oriented for C<T>
+- [ ] Object oriented for C
 - [ ] name_arr.nt method.
 - [ ] Test for memory corruption.
