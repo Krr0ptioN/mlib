@@ -65,10 +65,11 @@ mdata_array_insert_typename(&name_arr,index,value)
 mdata_array_revese_typename(&name_arr);
 ```
 * Swap elements by index in array:
- ```c
+```c
 mdata_array_swap_typename(&name_arr,index,index_second);
 ```
-##### Example:
+
+##### Example:  
 ```c
 #include "Collection.h"
 #include <stdio.h>
@@ -111,8 +112,62 @@ int main(){
 	return 0;
 }
 ```
+
 #### C++
 
+Example:
+```cpp
+#include "Collection.h"
+
+mdata::array<T> name_arr(size);
+	// Copy the array
+mdata::array<T> name_arr2 = name_arr;```
+To accessing the array elements use this struct elements.
+```cpp
+name_arr[index];
+```
+
+Methods:
+* Get value by idnex:
+``` c
+name_arr.get(index);
+```
+* Set value by index:
+ ```c
+ name_arr.set(index,value);
+```
+* Adding to array size by specified number:
+ ```c
+name_arr.resize(add_size);
+```
+* Append value to list:
+ ```c
+name_arr.append(value);
+```
+* Append other array to list:
+ ```c
+name_arr.append_arr(&name_arr,&second_array);
+```
+* Search value(return index):<T>
+ ```c
+name_arr.search(value); -> index of vlaue
+```
+* Remove elements by index:
+ ```c
+name_arr.remove(index);
+```
+* Insert value or elements by index:
+ ```c
+name_arr.insert(index,value)
+```
+* Reverse array:
+ ```c
+name_arr.reverse();
+```
+* Swap elements by index in array:
+ ```c
+name_arr.swap(index,index_second);
+```
 
 ### TODO
 Data structure:
@@ -120,6 +175,6 @@ Data structure:
 - [ ] Stack and Queue
 other:
 - [ ] Polymorphism for C and C++
-- [ ] Object oriented for C
-- [ ] mdata_array_print method.
+- [ ] Object oriented for C<T>
+- [ ] name_arr.nt method.
 - [ ] Test for memory corruption.
