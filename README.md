@@ -173,8 +173,9 @@ name_arr.swap(index,index_second);
 Data structure:
 - [ ] Linked List
 - [ ] Stack and Queue
-other:
+
+Other:
 - [ ] Polymorphism for C and C++
 - [ ] Object oriented for C
-- [ ] name_arr.nt method.
+- [ ] print method.
 - [ ] Test for memory corruption.
