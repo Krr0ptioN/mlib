@@ -1,0 +1,35 @@
+
+* TODO Array
+** DONE Implement the Array methods
+   - [X] isEmpty
+   - [X] get
+   - [X] set
+   - [X] append
+   - [X] append_arr
+   - [X] search
+   - [X] remove
+   - [X] insert
+   - [X] swap
+   - [X] reverse
+   - [X] resize
+   - [-] print
+   - [ ] test the resultes
+
+** DONE Method list add struct
+   - [X] isEmpty
+   - [X] get
+   - [X] set
+   - [X] append
+   - [X] append_arr
+   - [X] search
+   - [X] remove
+   - [X] insert
+   - [X] swap
+   - [X] reverse
+   - [X] print
+
+
+
+
+
+
