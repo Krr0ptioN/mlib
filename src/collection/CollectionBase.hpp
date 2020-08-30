@@ -4,6 +4,7 @@ namespace mdata{
 	template<typename T>
 
 	class CollectionBase {
+	public:
 		size_t length = 0;
 		size_t size = 0;
 		virtual inline T get(size_t index) = 0;
@@ -16,6 +17,8 @@ namespace mdata{
 		virtual inline void swap(size_t index,size_t index2) = 0;
 		virtual void reverse() = 0;
 		virtual void print() = 0;
+		virtual void shiftRight();
+		virtual void shiftLeft();
 		virtual T operator[](size_t index) = 0;
 	};
 

@@ -13,22 +13,9 @@ namespace mdata {
 		size_t size = 0;
 	public:
 		
-		// Cons
-		array(size_t entr_size) {
-			size = entr_size;
-			list = new T[size];
-		}
-
-		array(array &array2){
-			size = array2.getSize();
-			list = new T[size];
-			for(size_t i = 0; i < array2.length;i++)
-				list[length++] = array2[i];
-		}
-		
-		~array(){
-			delete[] list; 
-		}
+		array(size_t entr_size);
+		array(array &array2);
+		~array();
 		
 		size_t length = 0;
 		
@@ -43,13 +30,29 @@ namespace mdata {
 		inline void swap(size_t index,size_t index2);
 		void reverse();
 		void print();
-		// shift right
 		void shiftRight();
-		// shift left
-		// rotate right
-		// rotate left
+		void shiftLeft();
 		T operator[](size_t index);
 	};
+}
+
+template<typename T>
+mdata::array<T>::array(size_t entr_size) {
+	size = entr_size;
+	list = new T[size];
+}
+
+template<typename T>
+mdata::array<T>::array(array &array2){
+	size = array2.getSize();
+	list = new T[size];
+	for(size_t i = 0; i < array2.length;i++)
+		list[length++] = array2[i];
+}
+
+template<typename T>
+mdata::array<T>::~array(){
+	delete[] list;
 }
 
 template<typename T>
@@ -109,7 +112,6 @@ void mdata::array<T>::resize(size_t add_size){
 
 template<typename T>
 void mdata::array<T>::insert(size_t index,T value){
-	// if size is less then index resize the list.
 	if(not(index >= size)){
 		resize(1);
 		for(size_t i = length;i > index;i--)
@@ -173,10 +175,18 @@ void mdata::array<T>::print(){
 
 template<typename T>
 void mdata::array<T>::shiftRight(){
-	T tmp = list[length];
-	for(unsigned int i = length;i > 1;i--)
-		list[i] = list[i-1];
+	T tmp = list[length - 1];
+	for(unsigned int i = length;i > 0;i--)
+		list[i] = list[i - 1];
 	list[0] = tmp;
+}
+
+template<typename T>
+void mdata::array<T>::shiftLeft(){
+	T tmp = list[0];
+	for(unsigned int i = 0;i < length - 1;i++)
+		list[i] = list[i+1];
+	list[length-1] = tmp;
 }
 
 #endif // ARRAY_HPP
