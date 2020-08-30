@@ -22,47 +22,55 @@ array_name.list[index];
 ### Methods:  
 * Is Empty(return boolean):
  ```c
- mdata_array_isEmpty_typename(&name_arr);
+array_name.isEmpty(&array_name); --> boolean
 ```
 * Get value by idnex:
 ``` c
-mdata_array_get_typename(&name_arr,index);
+array_name.get(&array_name,index);
 ```
 * Set value by index:
  ```c
- mdata_array_set_typename(&name_arr,index,value);
+array_name.set(&array_name,index,value);
 ```
 * Adding to array size by specified number:
  ```c
- mdata_array_resize_typename(&name_arr,add_size);
+array_name.resize(&array_name,add_size);
 ```
 * Append value to list:
  ```c
- mdata_array_append_typename(&name_arr,value);
+array_name.append(&array_name,value);
 ```
 * Append other array to list:
  ```c
- mdata_array_append_arr_typename(&name_arr,&second_array);
+array_name.append_arr(&array_name,&second_array);
 ```
 * Search value(return index):
  ```c
-mdata_array_search_typename(&name_arr,); -> index of vlaue
+array_name.search(&array_name,); --> index of vlaue
 ```
 * Remove elements by index:
  ```c
-mdata_array_remove_typename(&name_arr,index);
+array_name.remove(&array_name,index);
 ```
 * Insert value or elements by index:
  ```c
-mdata_array_insert_typename(&name_arr,index,value)
+array_name.insert(&array_name,index,value)
 ```
 * Reverse array:
  ```c
-mdata_array_revese_typename(&name_arr);
+array_name.revese(&array_name);
 ```
 * Swap elements by index in array:
 ```c
-mdata_array_swap_typename(&name_arr,index,index_second);
+array_name.swap(&array_name,index,index_second);
+```
+* Shift elements to right:
+```c
+array_name.shiftRight(&array_name);
+```
+* Shift elements to left:
+```c
+array_name.shiftLeft(&array_name);
 ```
 
 ##### Example:  
@@ -126,41 +134,41 @@ name_arr[index];
 Methods:
 * Get value by idnex:
 ``` c
-name_arr.get(index);
+array_name.get(index);
 ```
 * Set value by index:
  ```c
- name_arr.set(index,value);
+ array_name.set(index,value);
 ```
 * Adding to array size by specified number:
  ```c
-name_arr.resize(add_size);
+array_name.resize(add_size);
 ```
 * Append value to list:
  ```c
-name_arr.append(value);
+array_name.append(value);
 ```
-* Append other array to list:
+* Append other array(from mdata namespace) to list:
  ```c
-name_arr.append_arr(&name_arr,&second_array);
+array_name.append_arr(second_array);
 ```
 * Search value(return index):<T>
  ```c
-name_arr.search(value); -> index of vlaue
+array_name.search(value); -> index of vlaue
 ```
 * Remove elements by index:
  ```c
-name_arr.remove(index);
+array_name.remove(index);
 ```
 * Insert value or elements by index:
  ```c
-name_arr.insert(index,value)
+array_name.insert(index,value)
 ```
 * Reverse array:
  ```c
-name_arr.reverse();
+array_name.reverse();
 ```
 * Swap elements by index in array:
  ```c
-name_arr.swap(index,index_second);
+array_name.swap(index,index_second);
 ```

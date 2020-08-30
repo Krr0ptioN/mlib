@@ -12,7 +12,7 @@ Data structure:
 - [ ] Stack and Queue
 
 Other:
-- [ ] Polymorphism for C and C++
-- [ ] Object oriented for C
+- [X] Polymorphism for C and C++
+- [X] Object oriented for C
 - [ ] print method.
 - [ ] Test for memory corruption.

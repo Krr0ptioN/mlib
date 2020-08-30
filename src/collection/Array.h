@@ -14,6 +14,19 @@
 		TYPE *list;						\
 		size_t length;						\
 		size_t size;						\
+		bool (*isEmpty)(struct mdata_array_##TYPE *);		\
+		TYPE (*get)(struct mdata_array_##TYPE *,size_t);	\
+		void (*set)(struct mdata_array_##TYPE *,size_t,TYPE);	\
+		void (*resize)(struct mdata_array_##TYPE *,size_t);	\
+		void (*append)(struct mdata_array_##TYPE *,TYPE);	\
+		void (*append_arr)(struct mdata_array_##TYPE *,struct mdata_array_##TYPE *); \
+		size_t (*search)(struct mdata_array_##TYPE *,TYPE);	\
+		void (*remove)(struct mdata_array_##TYPE *,size_t);	\
+		void (*swap)(struct mdata_array_##TYPE *,size_t,size_t); \
+		void (*insert)(struct mdata_array_##TYPE *,size_t,TYPE); \
+		void (*reverse)(struct mdata_array_##TYPE *);		\
+		void (*shiftRight)(struct mdata_array_##TYPE *);	\
+		void (*shiftLeft)(struct mdata_array_##TYPE *);		\
 	};								\
 	bool mdata_array_isEmpty_##TYPE(struct mdata_array_##TYPE * self_array){ \
 		if(self_array->length == 0)				\
@@ -103,49 +116,46 @@
 		}							\
 	}								\
 									\
-	void mdata_array_reverse_##TYPE(struct mdata_array_##TYPE* self_array){\
+	void mdata_array_reverse_##TYPE(struct mdata_array_##TYPE* self_array){	\
 		size_t mid = (self_array->length - 1)/2;		\
 		for(size_t i = 0;i< mid; i++)				\
 			mdata_array_swap_##TYPE(self_array,i,(self_array->length - (i+1))); \
+	}								\
+	void mdata_array_shiftRight_##TYPE(struct mdata_array_##TYPE* self_array){ \
+		TYPE tmp = self_array->list[self_array->length - 1];	\
+		for(size_t i = self_array->length;i > 0;i--)	\
+			self_array->list[i] = self_array->list[i - 1];	\
+		self_array->list[0] = tmp;				\
+	}								\
+									\
+	void mdata_array_shiftLeft_##TYPE(struct mdata_array_##TYPE* self_array){ \
+		TYPE tmp = self_array->list[0];				\
+		for(size_t i = 0;i < self_array->length - 1;i++)	\
+			self_array->list[i] = self_array->list[i+1];	\
+		self_array->list[self_array->length-1] = tmp;		\
 	}
+
 	
 
 #define mdata_array_new(TYPE,SIZE)					\
 	{								\
 		.list = (TYPE*)malloc(SIZE * sizeof(TYPE)),		\
-			.size = SIZE,					\
-			};
+		.size = SIZE,						\
+		.isEmpty = mdata_array_isEmpty_##TYPE,			\
+		.get = mdata_array_get_##TYPE,				\
+		.set = mdata_array_set_##TYPE,				\
+		.resize = mdata_array_resize_##TYPE,			\
+		.append = mdata_array_append_##TYPE,			\
+		.append_arr = mdata_array_append_arr_##TYPE,		\
+		.search = mdata_array_search_##TYPE,			\
+		.remove = mdata_array_remove_##TYPE,			\
+		.swap = mdata_array_swap_##TYPE,			\
+		.insert = mdata_array_insert_##TYPE,			\
+		.reverse = mdata_array_reverse_##TYPE,			\
+		.shiftRight = mdata_array_shiftRight_##TYPE,		\
+		.shiftLeft = mdata_array_shiftLeft_##TYPE,		\
+	};
 
 #define mdata_array(TYPE)			\
 	struct mdata_array_##TYPE	
-
 #endif
-
-
-/*void (*print_##TYPE)(struct mdata_array_##TYPE* self_array);	\*/ 
-		/* bool (*isEmpty)(struct mdata_array_##TYPE* mdata_self_array);	\ */
-	        /* TYPE (*get)(struct mdata_array_##TYPE* self_array,size_t index); \ */
-		/* void (*set)(struct mdata_array_##TYPE* self_array,size_t index,TYPE value); \ */
-		/* void (*append)(struct mdata_array_##TYPE* self_array,TYPE value); \ */
-		/* void (*append_arr)(struct mdata_array_##TYPE* self_array,struct mdata_array_##TYPE* array2); \ */
-		/* size_t (*search)(struct mdata_array_##TYPE* self_array,TYPE value); \ */
-		/* void (*remove)(struct mdata_array_##TYPE* self_array,size_t index); \ */
-		/* void (*insert)(struct mdata_array_##TYPE* self_array,size_t index,TYPE); \ */
-		/* void _(*sw_ap)(struct mdata_array_##TYPE* self_array,size_t index,size_t index2); \ */
-		/* void (*reverse)(struct mdata_array_##TYPE* self_array);	\ */
-		/* void (*resize)(struct mdata_array_##TYPE* self_array,size_t add_size); \ */
-
-	/* 								\ */
-	/* struct mdata_array_##TYPE 
-	/* 		.isEmpty = isEmpty_##TYPE,			\ */
-	/* 		.get = mdata_get_##TYPE				\ */
-	/* 		.set = set_##TYPE				\ */
-	/* 		.append = mdata_append_##TYPE				\ */
-	/* 		.append_arr = append_arr_##TYPE			\ */
-	/* 		.search = search_##TYPE				\ */
-	/* 		.remove = remove_##TYPE				\ */
-	/* 		.insert = mdata_insert_##TYPE				\ */
-	/* 		.swap = swap_##TYPE				\ */
-	/* 		.reverse = reverse_##TYPE			\ */
-	/* 		.resize = mdata_array_resize_##TYPE				\ */
-    	/* &print_##TYPE					*/      

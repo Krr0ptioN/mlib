@@ -13,14 +13,11 @@
    - [X] reverse
    - [X] resize
    - [-] print
+   - [X] Shift right
+   - [X] Shift left
    - [ ] test the resultes
-   - [ ] Shift right
-   - [ ] Shift left
-   - [ ] Rotate left
-   - [ ] Rotate right
 
-
-
+      
 ** DONE Method list add struct
    - [X] isEmpty
    - [X] get
@@ -33,12 +30,6 @@
    - [X] swap
    - [X] reverse
    - [X] print
-   - [ ] Shift right
-   - [ ] Shift left
-   - [ ] Rotate left
-   - [ ] Rotate right
-
-
-
-
+   - [X] Shift right
+   - [X] Shift left
 
