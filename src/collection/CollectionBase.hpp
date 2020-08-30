@@ -16,7 +16,7 @@ namespace mdata{
 		virtual inline void swap(size_t index,size_t index2) = 0;
 		virtual void reverse() = 0;
 		virtual void print() = 0;
-		T operator[](size_t index) = 0;
+		virtual T operator[](size_t index) = 0;
 	};
 
 }

@@ -43,7 +43,11 @@ namespace mdata {
 		inline void swap(size_t index,size_t index2);
 		void reverse();
 		void print();
-		
+		// shift right
+		void shiftRight();
+		// shift left
+		// rotate right
+		// rotate left
 		T operator[](size_t index);
 	};
 }
@@ -165,6 +169,14 @@ void mdata::array<T>::print(){
 	for(size_t i = 0;i < length;i++)
 		std::cout << list[i] << ((i == (length - 1)) ? " ]" : ",");
 	std::cout << std::endl;
+}
+
+template<typename T>
+void mdata::array<T>::shiftRight(){
+	T tmp = list[length];
+	for(unsigned int i = length;i > 1;i--)
+		list[i] = list[i-1];
+	list[0] = tmp;
 }
 
 #endif // ARRAY_HPP
