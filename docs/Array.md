@@ -82,32 +82,32 @@ array_name.shiftLeft(&array_name);
 mdata_array_template(int)
 
 int main(){
-	mdata_array(int) arr = mdata_array_new(int,10);
+mdata_array(int) arr = mdata_array_new(int,10);
 
-	mdata_array_append_int(&arr,12);
-    mdata_array_append_int(&arr,30);
+	arr.append(&arr,12);
+    arr.append(&arr,30);
     
 	for(size_t i = 0;i < arr.length;i++)
     	printf("%d ",arr.list[i]);
     printf("\n");
     
-	mdata_array_remove_int(&arr,1);
+    arr.remove(&arr,1);
     
 	for(size_t i = 0;i < arr.length;i++)
     	printf("%d",arr.list[i]);
     printf("\n");
     
-	mdata_array_append_int(&arr,7);
-    mdata_array_append_int(&arr,42);
-    mdata_array_append_int(&arr,41);
-    mdata_array_append_int(&arr,67);
-    mdata_array_insert_int(&arr,4,100);
+    arr.append(&arr,7);
+    arr.append(&arr,42);
+    arr.append(&arr,41);
+    arr.append(&arr,67);
+    arr.insert(&arr,4,100);
     
 	for(size_t i = 0;i < arr.length;i++)
     	printf("%d ",arr.list[i]);
     printf("\n");
     
-	mdata_array_reverse_int(&arr);
+    arr.reverse(&arr);
     
 	for(size_t i = 0;i < arr.length;i++)
     	printf("%d ",arr.list[i]);

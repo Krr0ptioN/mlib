@@ -1,6 +1,6 @@
 
 * TODO Array
-** DONE Implement the Array methods
+** IN-PROGRESS Implement the Array methods
    - [X] isEmpty
    - [X] get
    - [X] set
@@ -15,10 +15,11 @@
    - [-] print
    - [X] Shift right
    - [X] Shift left
-   - [ ] test the resultes
+   - [ ] test the results
+*** IN-PROGRESS binary methodes
+   - [ ] merge
 
-      
-** DONE Method list add struct
+** IN-PROGRESS Method list add struct
    - [X] isEmpty
    - [X] get
    - [X] set
@@ -32,4 +33,5 @@
    - [X] print
    - [X] Shift right
    - [X] Shift left
+   - [ ] merge
 
