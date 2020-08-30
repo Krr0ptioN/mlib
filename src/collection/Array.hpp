@@ -32,6 +32,9 @@ namespace mdata {
 		void print();
 		void shiftRight();
 		void shiftLeft();
+		T begin() const;
+		T end() const;
+	        array<T> merge(array& other);
 		T operator[](size_t index);
 	};
 }
@@ -188,6 +191,16 @@ void mdata::array<T>::shiftLeft(){
 		list[i] = list[i+1];
 	list[length-1] = tmp;
 }
+template<typename T>
+T mdata::array<T>::begin() const{
+	return list[0];
+}
+
+template<typename T>
+T mdata::array<T>::end() const {
+	return list[length - 1];
+}
+
 
 #endif // ARRAY_HPP
 
