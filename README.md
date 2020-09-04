@@ -1,5 +1,6 @@
-# mdata
-ADT Data Strcuture with Template simulation for Clang.
+# mlib
+General purpose library to avoiding DRY(Don't repeat yourself).
+
 ## Documentation
 -----------------------
 ### Installation
@@ -12,7 +13,6 @@ Data structure:
 - [ ] Stack and Queue
 
 Other:
-- [X] Polymorphism for C and C++
 - [X] Object oriented for C
 - [ ] print method.
 - [ ] Test for memory corruption.
