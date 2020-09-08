@@ -190,3 +190,15 @@ T mlib::List<T>::operator[](index_t index){
 	Node<T>* tmp = get(index);
 	return tmp->value;
 }
+
+template<typename T>
+void mlib::List<T>::strip(T value){
+	for(index_t i = 0; i < length;i++){
+		if(get(i) == value){
+			for(index_t j = i;j < length;j++){
+				if(get(j) == value)
+					remove(j);
+			}
+		}
+	}
+}

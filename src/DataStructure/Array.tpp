@@ -168,7 +168,7 @@ template<typename T>
 inline void mlib::array<T>::strip(T value){
 	for(index_t i = 0; i < length;i++){
 		if(list[i] == value){
-			for(index_t j = i + 1;j < length;j++){
+			for(index_t j = i;j < length;j++){
 				if(list[j] == value)
 					remove(j);
 			}

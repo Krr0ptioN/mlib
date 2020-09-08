@@ -2,10 +2,6 @@
 #include <iostream>
 #include "Collection.hpp"
 
-#if defined(__LIST_HPP_INCLUDED)
-#error "List.hpp can not be included directely"
-#endif
-
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 
