@@ -7,15 +7,14 @@ mlib::List<T>::~List(){
 }
 
 template<typename T>
-mlib::Node<T>* mlib::List<T>::get(index_t index)
-{
+mlib::Node<T>* mlib::List<T>::get(index_t index){
 	if (not(index < 0 or index > length)){
 		Node<T>* node = head;
 		for (int i = 0; i < index; ++i)
 			node = node->next;
 		return node;
 	}
-	return NULL;
+	return nullptr;
 }
 
 
@@ -71,7 +70,7 @@ index_t mlib::List<T>::search(T value){
 		while (node->value != value){
 			++index;
 			node = node->next;
-			if (node == NULL){
+			if (node == nullptr){
 				return -1;
 			}
 		}
@@ -99,11 +98,11 @@ void mlib::List<T>::remove_back() {
 			Node<T>* prevNode = head;
 			Node<T>* node = head->next;
 
-			while (node->next != NULL) {
+			while (node->next != nullptr) {
 				prevNode = prevNode->next;
 				node = node->next;
 			}
-			prevNode->next = NULL;
+			prevNode->next = nullptr;
 			tail = prevNode;
 			delete node;
 			--length;
