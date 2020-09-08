@@ -1,9 +1,6 @@
 #include <iostream>
 #include "Collection.hpp"
 
-#if !defined(__LIST_HPP_INCLUDED)
-#error "List.hpp can not be included directely"
-#endif
 
 #ifndef LIST_HPP
 #define LIST_HPP
@@ -21,7 +18,7 @@ namespace mlib {
 	class List {
 	private:
 		index_t length = 0;
-		Node<T>* get(index_t index);
+		T get(index_t index);
 		Node<T>* head;
 		Node<T>* tail;
 	public:
@@ -37,10 +34,13 @@ namespace mlib {
 		void push_front(T value);
 		T pop_front();
 		T pop_back();
-		T begin();
-		T end();
+		inline T begin();
+		inline T end();
+		void reverse();
+		void strip(T value);
 		void remove(index_t index);
 		void purge();
+		void freedup();
 		void print();
 		T operator[](index_t index);
 	};
