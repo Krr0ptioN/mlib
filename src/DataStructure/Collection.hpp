@@ -20,8 +20,6 @@ namespace mlib {
 		virtual void swap() = 0;
 		virtual void reverse() = 0;
 		virtual void print()  = 0;
-		virtual void shiftRight() = 0;
-		virtual void shiftLeft() = 0;
 		virtual void strip() = 0;
 		virtual T begin() = 0;
 		virtual T end() = 0;
