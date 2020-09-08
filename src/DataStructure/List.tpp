@@ -200,3 +200,9 @@ void mlib::List<T>::strip(T value){
 		}
 	}
 }
+
+template<typename T>
+void mlib::List<T>::freedup(){
+	for(int i = 0;i < length;i++)
+		strip(get(i));
+}
