@@ -36,7 +36,6 @@ namespace mlib {
 		void purge();
 		void freedup();
 		void print();
-		void freeloop();
 		void push_back(T value);
 		void push_front(T value);
 		T pop_front();
