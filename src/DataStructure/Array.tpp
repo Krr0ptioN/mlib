@@ -221,3 +221,8 @@ template<typename T>
 inline void mlib::array<T>::push_back(T value){
 	append(value);
 }
+
+typename<typename T>
+void mlib::array<T>::purge(){
+	delete[] list;
+}
