@@ -4,29 +4,57 @@ mlib::List<T>::List(){}
 template<typename T>
 mlib::List<T>::~List(){
 	purge();
+	length = 0;
+	head = tail = nullptr;
 }
 
 template<typename T>
 T mlib::List<T>::get(index_t index){
 	if (not(index < 0 or index > length)){
-		Node<T>* node = head;
-		for (int i = 0; i < index; ++i)
-			node = node->next;
-		return node->value;
+		if(index == 0)
+			return head->value;
+		else if(index == length - 1)
+			return tail->value;
+		else {
+			Node<T>* node = head;
+			for (int i = 0; i < index; ++i)
+				node = node->next;
+			return node->value;
+		}
+	}
+	return -1;
+}
+
+
+template<typename T>
+mlib::Node<T>* mlib::List<T>::getNode(index_t index){
+	if (not(index < 0 or index > length)){
+		if(index == 0)
+			return head;
+		else if(index == length - 1)
+			return tail;
+		else {
+			Node<T>* node = head;
+			for (int i = 0; i < index; ++i)
+				node = node->next;
+			return node;
+		}
 	}
 	return NULL;
 }
-
 
 template <typename T>
 void mlib::List<T>::append_front(T value)
 {
 	Node<T>* node = new Node<T>(value);
 	node->next = head;
+	if(head != nullptr)
+		head->prev = node;
+	node->prev = nullptr;
 	head = node;
 	if (length == 0)
 		tail = head;
-	length++;
+	++length;
 }
 
 template <typename T>
@@ -36,6 +64,8 @@ void mlib::List<T>::append_back(T value){
 		return;
 	} else {
 		Node<T>* node = new Node<T>(value);
+		node->prev = tail;
+		node->next = nullptr;
 		tail->next = node;
 		tail = node;
 		length++;
@@ -45,18 +75,18 @@ void mlib::List<T>::append_back(T value){
 template <typename T>
 void mlib::List<T>::insert(index_t index, T value){
 	if (not(index < 0 or index > length)){
-		if (index == 0){
+		if (index == 0)
 			append_front(value);
-		} else if (index == length){
-			append(value);
-		} else {
-			Node<T>* prevNode = head;
-			for (int i = 0; i < index - 1; ++i)
-				prevNode = prevNode->next;
+		else if (index == length)
+			append_back(value);
+		else {
+			Node<T>* prevNode = getNode(index - 1);
 			Node<T>* nextNode = prevNode->next;
 			Node<T>* node = new Node<T>(value);
 			node->next = nextNode;
+			node->prev = prevNode;
 			prevNode->next = node;
+			nextNode->prev = node;
 			length++;
 		}
 	}
@@ -70,9 +100,8 @@ index_t mlib::List<T>::search(T value){
 		while (node->value != value){
 			++index;
 			node = node->next;
-			if (node == nullptr){
+			if (node == nullptr)
 				return -1;
-			}
 		}
 		return index;
 	}
@@ -84,6 +113,7 @@ void mlib::List<T>::remove_front(){
 	if (length != 0){
 		Node<T>* node = head;
 		head = head->next;
+		head->prev = nullptr;
 		delete node;
 		length--;
 	}
@@ -91,19 +121,14 @@ void mlib::List<T>::remove_front(){
 
 template <typename T>
 void mlib::List<T>::remove_back() {
-	if (length != 0)){
+	if (length != 0){
 		if (length == 1)
 			remove_front();		
 		else {	
-			Node<T>* prevNode = head;
-			Node<T>* node = head->next;
-
-			while (node->next != nullptr) {
-				prevNode = prevNode->next;
-				node = node->next;
-			}
-			prevNode->next = nullptr;
+			Node<T>* prevNode = tail->prev;
+			Node<T>* node = tail;
 			tail = prevNode;
+			tail->next = nullptr;
 			delete node;
 			--length;
 		}
@@ -118,21 +143,20 @@ void mlib::List<T>::remove(index_t index){
 		else if (index == length - 1)
 			remove_back();
 		else {
-			Node<T>* prevNode = head;
-			for(int i = 0; i < index - 1; ++i)
-				prevNode = prevNode->next;
+			Node<T>* prevNode = getNode(index - 1);
 			Node<T>* node = prevNode->next;
 			Node<T>* nextNode = node->next;	
 			prevNode->next = nextNode;
+			nextNode->prev = prevNode;
 			delete node;
-			length--;
+			--length;
 		}
 	}
 }
 
 template<typename T>
 void mlib::List<T>::push_back(T value){
-	append(value);
+	append_back(value);
 }
 
 template<typename T>
@@ -156,40 +180,36 @@ T mlib::List<T>::pop_back(){
 
 template<typename T>
 inline T mlib::List<T>::begin(){
-	return get(0);
+	return head->value;
 }
 
 template<typename T>
 inline T mlib::List<T>::end(){
-	return get(length - 1);;
+	return tail->value;
 }
 
 template<typename T>
 void mlib::List<T>::purge(){
-	if(length != 0){
+	if(length != 0)
 		for(index_t i = 0;i < length;i++)
 			remove_front();
-		length = 0;
-		head = tail = nullptr;
-	}
 }
 
 template<typename T>
 void mlib::List<T>::print(){
 	std::cout << "[ ";
 	Node<T>* node = head;
-	for(index_t i = 0;i < length;i++){
-		std::cout << node->value 
-				  << ((i == length - 1) ? " " : ",");
+	for(index_t i = 0;i < length - 1;i++){
+		std::cout << node->value <<  ",";
 		node = node->next;
 	}
-	std::cout << "] ";
+	// node = node->next;
+	std::cout << node->value << " ] ";
 }
 
 template<typename T>
 T mlib::List<T>::operator[](index_t index){
-	Node<T>* tmp = get(index);
-	return tmp->value;
+	return get(index);
 }
 
 template<typename T>
@@ -211,10 +231,17 @@ void mlib::List<T>::freedup(){
 }
 
 template<typename T>
-void mlib::List<T>::detect_loop(){
-	Node<T> tmp = head;
-	for(index_t i = 0;i < this->length;i++)
-		tmp = tmp->next;
-	if(tmp->next != nullptr)
-		tmp->next = nullptr;
+void mlib::List<T>::swap(index_t index_1,index_t index_2){
+	Node<T>* node1 = getNode(index_1);
+	Node<T>* node2 = getNode(index_2);
+	T tmp = node1->value;
+	node1->value = node2->value;
+	node2->value = tmp;
+}
+
+template<typename T>
+void mlib::List<T>::reverse(){
+	index_t mid = (this->length - 1) / 2;
+	for(index_t i = 0;i <= mid;i++)
+		swap(i,(length - i - 1));
 }

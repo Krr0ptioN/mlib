@@ -12,16 +12,19 @@ namespace mlib {
 	public:
 		T value;
 		Node<T>* next;
+		Node<T>* prev;
 		Node(T value) : value(value) {}
 	};
 
 	template <typename T>
-	class List {
+	class List : public Collection<T> {
 	private:
 		index_t length = 0;
-		T get(index_t index);
 		Node<T>* head;
 		Node<T>* tail;
+
+		T get(index_t index);
+		Node<T>* getNode(index_t index);
 	public:
 		List();
 		~List();
@@ -31,6 +34,7 @@ namespace mlib {
 		void remove_front();
 		void remove_back();
 		void reverse();
+		void swap(index_t index_1,index_t index_2);
 		void strip(T value);
 		void remove(index_t index);
 		void purge();
