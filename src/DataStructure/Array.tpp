@@ -123,10 +123,9 @@ index_t mlib::array<T>::search(T value){
 
 
 template<typename T>
-void mlib::array<T>::remove(index_t index){
-        for(;index < length;index++){
+void mlib::array<T>::remove_back(index_t index){
+    for(;index < length;index++)
 		list[index] = list[index + 1];
-	}
 	length--;
 }
 
@@ -141,7 +140,7 @@ template<typename T>
 void mlib::array<T>::reverse(){
 	index_t mid = (length - 1)/2;
 	for(index_t i = 0;i <= mid;i++)
-		swap(i,(length - (i+1)));
+		swap(i,(length - i - 1));
 }
 
 
@@ -223,7 +222,7 @@ inline void mlib::array<T>::push_back(T value){
 	append(value);
 }
 
-typename<typename T>
+template<typename T>
 void mlib::array<T>::purge(){
 	delete[] list;
 }
