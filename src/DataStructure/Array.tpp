@@ -187,7 +187,6 @@ inline void mlib::array<T>::strip(T value){
 			}
 		}
 	}
-
 }
 
 template<typename T>
