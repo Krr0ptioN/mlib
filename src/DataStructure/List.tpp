@@ -10,14 +10,16 @@ mlib::List<T>::~List(){
 
 template<typename T>
 T mlib::List<T>::get(index_t index){
-	if (not(index < 0 or index > length)){
+	if (not(index > length)){
 		if(index == 0)
 			return head->value;
 		else if(index == length - 1)
 			return tail->value;
 		else {
 			Node<T>* node = head;
-			for (int i = 0; i < index; ++i)
+			if(index < 0)
+				index = length + (index -1);
+			for (int i = 0; i <= index; ++i)
 				node = node->next;
 			return node->value;
 		}
