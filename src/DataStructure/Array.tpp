@@ -61,6 +61,18 @@ void mlib::array<T>::append(array& array2){
 }
 
 template<typename T>
+void mlib::array<T>::append_front(T value){
+	if (length >= size)
+		resize(1);
+	for(unsigned int i = 0;i < length - 1;i++)
+		list[i] = list[i+1];
+	list[0] = value;
+	++length;
+
+}
+
+
+template<typename T>
 void mlib::array<T>::resize(index_t add_size){
 	this->size += add_size;
 	if(add_size == 0)
