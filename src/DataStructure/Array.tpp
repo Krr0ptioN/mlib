@@ -13,12 +13,19 @@ mlib::array<T>::array(const array<T> &array2){
 
 template<typename T>
 mlib::array<T>::~array(){
-	delete[] list;
+	purge();
+	this->size = this->length = 0;
+
 }
 
 template<typename T>
 index_t mlib::array<T>::getSize(){
 	return this->size;
+}
+
+template<typename T>
+index_t mlib::array<T>::getLength(){
+	return this->length;
 }
 
 template<typename T>
@@ -39,17 +46,14 @@ T mlib::array<T>::operator[](index_t index){
 }
 
 template<typename T>
-void mlib::array<T>::append(T value){
-	if (length >= size) {
+void mlib::array<T>::append_back(T value){
+	if (length >= size)
 		resize(1);
-		list[length++] = value;
-	} else {
-		list[length++] = value;
-	}
+	list[length++] = value;
 }
 
 template<typename T>
-void mlib::array<T>::append(array& array2){
+void mlib::array<T>::append_back(array& array2){
 	index_t size2 = array2.getSize();
 	int append_size = size - size2;
 	append_size = abs(append_size);
@@ -75,16 +79,13 @@ void mlib::array<T>::append_front(T value){
 template<typename T>
 void mlib::array<T>::resize(index_t add_size){
 	if(add_size > 0){
-	this->size += add_size;
-	if(add_size == 0)
-		return;
-	T *tmpList = new T[this->size];
-
-	for(index_t i = 0;i <= length;i++)
-		tmpList[i] = list[i];
-
-	delete[] list;
-	list = tmpList;
+		this->size += add_size;
+		T *tmpList = new T[this->size];
+		for(index_t i = 0;i <= length;i++)
+			tmpList[i] = list[i];
+		delete[] list;
+		list = tmpList;
+	}
 }
 
 template<typename T>
