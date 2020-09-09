@@ -74,6 +74,7 @@ void mlib::array<T>::append_front(T value){
 
 template<typename T>
 void mlib::array<T>::resize(index_t add_size){
+	if(add_size > 0){
 	this->size += add_size;
 	if(add_size == 0)
 		return;
