@@ -209,3 +209,12 @@ void mlib::List<T>::freedup(){
 	for(int i = 0;i < length;i++)
 		strip(get(i));
 }
+
+template<typename T>
+void mlib::List<T>::detect_loop(){
+	Node<T> tmp = head;
+	for(index_t i = 0;i < this->length;i++)
+		tmp = tmp->next;
+	if(tmp->next != nullptr)
+		tmp->next = nullptr;
+}
