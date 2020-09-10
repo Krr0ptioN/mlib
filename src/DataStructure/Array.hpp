@@ -21,8 +21,9 @@ namespace mlib {
 		void append_back(T value);
 		void append_front(T value);
 		void append_back(array& array2);
-		void remove_back(index_t index);
-		void remove_front(index_t index);
+		void remove_back();
+		void remove_front();
+		void remove(index_t index);
 		void insert(index_t index,T value);
 		void swap(index_t index,index_t index2);
 		void reverse();

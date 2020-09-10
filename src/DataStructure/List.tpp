@@ -18,7 +18,7 @@ T mlib::List<T>::get(index_t index){
 		else {
 			Node<T>* node = head;
 			if(index < 0)
-				index = length + (index -1);
+				index = length + (index - 1);
 			for (int i = 0; i <= index; ++i)
 				node = node->next;
 			return node->value;
@@ -37,6 +37,8 @@ mlib::Node<T>* mlib::List<T>::getNode(index_t index){
 			return tail;
 		else {
 			Node<T>* node = head;
+			if(index < 0)
+				index = length + (index - 1);
 			for (int i = 0; i < index; ++i)
 				node = node->next;
 			return node;
@@ -76,12 +78,14 @@ void mlib::List<T>::append_back(T value){
 
 template <typename T>
 void mlib::List<T>::insert(index_t index, T value){
-	if (not(index < 0 or index > length)){
+	if (not(index > length)){
 		if (index == 0)
 			append_front(value);
 		else if (index == length)
 			append_back(value);
 		else {
+			if(index < 0)
+				index = length + (index - 1);
 			Node<T>* prevNode = getNode(index - 1);
 			Node<T>* nextNode = prevNode->next;
 			Node<T>* node = new Node<T>(value);
@@ -206,8 +210,9 @@ void mlib::List<T>::print(){
 			std::cout << node->value <<  ",";
 			node = node->next;
 		}
+		std::cout << node->value;
 	}
-	std::cout << node->value << " ] ";
+	std::cout << " ] ";
 }
 
 template<typename T>

@@ -32,11 +32,11 @@ template<typename T>
 inline T mlib::array<T>::get(index_t index){
 	if(not(index >= length)){
 		if(index < 0) 
-			return list[length + index];
+			return list[length + (index - 1)];
 		else
 			return list[index];
 	} else {
-		throw std::runtime_error("Index elements out of range");
+		throw std::out_of_range("Index elements out of range");
 	}
 }
 
@@ -86,24 +86,23 @@ void mlib::array<T>::resize(index_t add_size){
 		delete[] list;
 		list = tmpList;
 	}
-}
+} 
 
 template<typename T>
 void mlib::array<T>::insert(index_t index,T value){
-	if(not(index >= size)){
-		resize(1);
+	index_t neg_index = length + index;
+	if(neg_index >= size or index >= size)
+		resize(length);
+	if(index < 0) {
+		for(index_t i = length;i > neg_index;i--)
+			list[i] = list[i- 1];
+		list[neg_index] = value;
+	} else {
 		for(index_t i = length;i > index;i--)
 			list[i] = list[i - 1];
 		list[index] = value;
-		length++;
-	} else {
-		if(index < 0)
-			throw std::runtime_error("Index elements out of range.");
-		for(index_t i = length;i > index;i--)
-			list[i] = list[i + 1];
-		list[index] = value;
-		length++;
 	}
+	length++;
 }
 
 template<typename T>
@@ -121,12 +120,21 @@ index_t mlib::array<T>::search(T value){
 	return -1;
 }
 
-
 template<typename T>
-void mlib::array<T>::remove_back(index_t index){
+void mlib::array<T>::remove(index_t index){
     for(;index < length;index++)
 		list[index] = list[index + 1];
 	length--;
+}
+
+template<typename T>
+void mlib::array<T>::remove_back(){
+    remove(0);
+}
+
+template<typename T>
+void mlib::array<T>::remove_front(){
+    remove(length - 1);
 }
 
 template<typename T>
@@ -200,7 +208,7 @@ inline void mlib::array<T>::freedup(){
 template<typename T>
 inline T mlib::array<T>::pop_front(){
 	T tmp = begin();
-	remove(length - 1);
+	remove_back();
 	return tmp;
 }
 
@@ -208,7 +216,7 @@ inline T mlib::array<T>::pop_front(){
 template<typename T>
 inline T mlib::array<T>::pop_back(){
 	T tmp = end();
-	remove(0);
+	remove_front();
 	return tmp;
 }
 
@@ -219,10 +227,10 @@ inline void mlib::array<T>::push_front(T value){
 
 template<typename T>
 inline void mlib::array<T>::push_back(T value){
-	append(value);
+	append_back(value);
 }
 
 template<typename T>
 void mlib::array<T>::purge(){
-	delete[] list;
+	delete[] this->list;
 }
