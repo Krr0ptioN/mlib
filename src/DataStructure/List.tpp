@@ -200,12 +200,13 @@ void mlib::List<T>::purge(){
 template<typename T>
 void mlib::List<T>::print(){
 	std::cout << "[ ";
-	Node<T>* node = head;
-	for(index_t i = 0;i < length - 1;i++){
-		std::cout << node->value <<  ",";
-		node = node->next;
+	if(length != 0){
+		Node<T>* node = head;
+		for(index_t i = 0;i < length - 1;i++){
+			std::cout << node->value <<  ",";
+			node = node->next;
+		}
 	}
-	// node = node->next;
 	std::cout << node->value << " ] ";
 }
 
