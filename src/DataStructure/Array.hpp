@@ -7,7 +7,7 @@
 
 namespace mlib {
 	template<typename T>
-	class array : public mlib::Collection<T> {
+	class Array : public mlib::Collection<T> {
 	private:
 		T* list;
 		index_t size = 0;
@@ -15,12 +15,12 @@ namespace mlib {
 		void resize(index_t add_size);
 	public:
 		
-		array(index_t entr_size);
-		array(const array<T> &array2);
+		Array(index_t entr_size);
+		Array(const Array<T> &array2);
 		~array();
 		void append_back(T value);
 		void append_front(T value);
-		void append_back(array& array2);
+		void append_back(Array& array2);
 		void remove_back();
 		void remove_front();
 		void remove(index_t index);
@@ -35,6 +35,7 @@ namespace mlib {
 		void purge();
 		void push_front(T value);
 		void push_back(T value);
+		bool empty();
 		index_t getLength();
 		index_t getSize();
 		index_t search(T value);

@@ -21,6 +21,7 @@ namespace mlib {
 		virtual void push_back(T value) = 0;
 		virtual void purge() = 0;
 		virtual index_t search(T value) = 0;
+		virtual bool empty() = 0;
 		virtual T begin() = 0;
 		virtual T end() = 0;
 		virtual T pop_front() = 0;

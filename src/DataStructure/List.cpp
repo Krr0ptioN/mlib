@@ -1,15 +1,20 @@
-template<typename T>
-mlib::List<T>::List(){}
+
+#include "List.hpp"
+
+using namespace mlib;
 
 template<typename T>
-mlib::List<T>::~List(){
+List<T>::List(){}
+
+template<typename T>
+List<T>::~List(){
 	purge();
 	length = 0;
 	head = tail = nullptr;
 }
 
 template<typename T>
-T mlib::List<T>::get(index_t index){
+T List<T>::get(index_t index){
 	if (not(index > length)){
 		if(index == 0)
 			return head->value;
@@ -29,7 +34,7 @@ T mlib::List<T>::get(index_t index){
 
 
 template<typename T>
-mlib::Node<T>* mlib::List<T>::getNode(index_t index){
+Node<T>* List<T>::getNode(index_t index){
 	if (not(index < 0 or index > length)){
 		if(index == 0)
 			return head;
@@ -48,7 +53,7 @@ mlib::Node<T>* mlib::List<T>::getNode(index_t index){
 }
 
 template <typename T>
-void mlib::List<T>::append_front(T value)
+void List<T>::append_front(T value)
 {
 	Node<T>* node = new Node<T>(value);
 	node->next = head;
@@ -62,7 +67,7 @@ void mlib::List<T>::append_front(T value)
 }
 
 template <typename T>
-void mlib::List<T>::append_back(T value){
+void List<T>::append_back(T value){
 	if (length == 0){
 		append_front(value);
 		return;
@@ -77,7 +82,7 @@ void mlib::List<T>::append_back(T value){
 }
 
 template <typename T>
-void mlib::List<T>::insert(index_t index, T value){
+void List<T>::insert(index_t index, T value){
 	if (not(index > length)){
 		if (index == 0)
 			append_front(value);
@@ -99,7 +104,7 @@ void mlib::List<T>::insert(index_t index, T value){
 }
 
 template <typename T>
-index_t mlib::List<T>::search(T value){
+index_t List<T>::search(T value){
 	if (length != 0){
 		int index = 0;
 		Node<T>* node = head;
@@ -115,7 +120,7 @@ index_t mlib::List<T>::search(T value){
 }
 
 template <typename T>
-void mlib::List<T>::remove_front(){
+void List<T>::remove_front(){
 	if (length != 0){
 		Node<T>* node = head;
 		head = head->next;
@@ -126,7 +131,7 @@ void mlib::List<T>::remove_front(){
 }
 
 template <typename T>
-void mlib::List<T>::remove_back() {
+void List<T>::remove_back() {
 	if (length != 0){
 		if (length == 1)
 			remove_front();		
@@ -142,7 +147,7 @@ void mlib::List<T>::remove_back() {
 }
 
 template<typename T>
-void mlib::List<T>::remove(index_t index){
+void List<T>::remove(index_t index){
 	if (not(index < 0 or index >= length or length == 0)){
 		if (index == 0)
 			remove_front();
@@ -161,48 +166,48 @@ void mlib::List<T>::remove(index_t index){
 }
 
 template<typename T>
-void mlib::List<T>::push_back(T value){
+void List<T>::push_back(T value){
 	append_back(value);
 }
 
 template<typename T>
-void mlib::List<T>::push_front(T value){
+void List<T>::push_front(T value){
 	append_front(value);
 }
 
 template<typename T>
-T mlib::List<T>::pop_front(){
+T List<T>::pop_front(){
 	T tmp = begin();
 	remove_front();
 	return tmp;
 }
 
 template<typename T>
-T mlib::List<T>::pop_back(){
+T List<T>::pop_back(){
 	T tmp = end();
 	remove_back();
 	return tmp;
 }
 
 template<typename T>
-inline T mlib::List<T>::begin(){
+inline T List<T>::begin(){
 	return head->value;
 }
 
 template<typename T>
-inline T mlib::List<T>::end(){
+inline T List<T>::end(){
 	return tail->value;
 }
 
 template<typename T>
-void mlib::List<T>::purge(){
+void List<T>::purge(){
 	if(length != 0)
 		for(index_t i = 0;i < length;i++)
 			remove_front();
 }
 
 template<typename T>
-void mlib::List<T>::print(){
+void List<T>::print(){
 	std::cout << "[ ";
 	if(length != 0){
 		Node<T>* node = head;
@@ -216,12 +221,12 @@ void mlib::List<T>::print(){
 }
 
 template<typename T>
-T mlib::List<T>::operator[](index_t index){
+T List<T>::operator[](index_t index){
 	return get(index);
 }
 
 template<typename T>
-void mlib::List<T>::strip(T value){
+void List<T>::strip(T value){
 	for(index_t i = 0; i < length;i++){
 		if(get(i) == value){
 			for(index_t j = i;j < length;j++){
@@ -233,13 +238,13 @@ void mlib::List<T>::strip(T value){
 }
 
 template<typename T>
-void mlib::List<T>::freedup(){
+void List<T>::freedup(){
 	for(int i = 0;i < length;i++)
 		strip(get(i));
 }
 
 template<typename T>
-void mlib::List<T>::swap(index_t index_1,index_t index_2){
+void List<T>::swap(index_t index_1,index_t index_2){
 	Node<T>* node1 = getNode(index_1);
 	Node<T>* node2 = getNode(index_2);
 	T tmp = node1->value;
@@ -248,7 +253,7 @@ void mlib::List<T>::swap(index_t index_1,index_t index_2){
 }
 
 template<typename T>
-void mlib::List<T>::reverse(){
+void List<T>::reverse(){
 	index_t mid = (this->length - 1) / 2;
 	for(index_t i = 0;i <= mid;i++)
 		swap(i,(length - i - 1));

@@ -1,10 +1,16 @@
+
+
+#include "Array.hpp"
+
+using namespace mlib;
+
 template<typename T>
-mlib::array<T>::array(index_t entr_size) : size(entr_size) {
+Array<T>::array(index_t entr_size) : size(entr_size) {
 	list = new T[size];
 }
 
 template<typename T>
-mlib::array<T>::array(const array<T> &array2){
+Array<T>::array(const Array<T> &array2){
 	size = array2.getSize();
 	list = new T[size];
 	for(index_t i = 0; i < array2.length;i++)
@@ -12,24 +18,24 @@ mlib::array<T>::array(const array<T> &array2){
 }
 
 template<typename T>
-mlib::array<T>::~array(){
+Array<T>::~array(){
 	purge();
 	this->size = this->length = 0;
 
 }
 
 template<typename T>
-index_t mlib::array<T>::getSize(){
+index_t Array<T>::getSize(){
 	return this->size;
 }
 
 template<typename T>
-index_t mlib::array<T>::getLength(){
+index_t Array<T>::getLength(){
 	return this->length;
 }
 
 template<typename T>
-inline T mlib::array<T>::get(index_t index){
+inline T Array<T>::get(index_t index){
 	if(not(index >= length)){
 		if(index < 0) 
 			return list[length + (index - 1)];
@@ -41,19 +47,19 @@ inline T mlib::array<T>::get(index_t index){
 }
 
 template<typename T>
-T mlib::array<T>::operator[](index_t index){
+T Array<T>::operator[](index_t index){
 	return get(index);
 }
 
 template<typename T>
-void mlib::array<T>::append_back(T value){
+void Array<T>::append_back(T value){
 	if (length >= size)
 		resize(1);
 	list[length++] = value;
 }
 
 template<typename T>
-void mlib::array<T>::append_back(array& array2){
+void Array<T>::append_back(array& array2){
 	index_t size2 = array2.getSize();
 	int append_size = size - size2;
 	append_size = abs(append_size);
@@ -65,7 +71,7 @@ void mlib::array<T>::append_back(array& array2){
 }
 
 template<typename T>
-void mlib::array<T>::append_front(T value){
+void Array<T>::append_front(T value){
 	if (length >= size)
 		resize(1);
 	for(unsigned int i = 0;i < length - 1;i++)
@@ -77,7 +83,7 @@ void mlib::array<T>::append_front(T value){
 
 
 template<typename T>
-void mlib::array<T>::resize(index_t add_size){
+void Array<T>::resize(index_t add_size){
 	if(add_size > 0){
 		this->size += add_size;
 		T *tmpList = new T[this->size];
@@ -89,7 +95,7 @@ void mlib::array<T>::resize(index_t add_size){
 } 
 
 template<typename T>
-void mlib::array<T>::insert(index_t index,T value){
+void Array<T>::insert(index_t index,T value){
 	index_t neg_index = length + index;
 	if(neg_index >= size or index >= size)
 		resize(length);
@@ -106,7 +112,7 @@ void mlib::array<T>::insert(index_t index,T value){
 }
 
 template<typename T>
-index_t mlib::array<T>::search(T value){
+index_t Array<T>::search(T value){
 	index_t mid = (length - 1)/2;
 	if(list[mid] == value)
 		return mid;
@@ -121,31 +127,31 @@ index_t mlib::array<T>::search(T value){
 }
 
 template<typename T>
-void mlib::array<T>::remove(index_t index){
+void Array<T>::remove(index_t index){
     for(;index < length;index++)
 		list[index] = list[index + 1];
 	length--;
 }
 
 template<typename T>
-void mlib::array<T>::remove_back(){
+void Array<T>::remove_back(){
     remove(0);
 }
 
 template<typename T>
-void mlib::array<T>::remove_front(){
+void Array<T>::remove_front(){
     remove(length - 1);
 }
 
 template<typename T>
-inline void mlib::array<T>::swap(index_t index,index_t index2){
+inline void Array<T>::swap(index_t index,index_t index2){
 	T tmp = list[index];
 	list[index] = list[index2];
 	list[index2] = tmp;
 }
 
 template<typename T>
-void mlib::array<T>::reverse(){
+void Array<T>::reverse(){
 	index_t mid = (length - 1)/2;
 	for(index_t i = 0;i <= mid;i++)
 		swap(i,(length - i - 1));
@@ -153,7 +159,7 @@ void mlib::array<T>::reverse(){
 
 
 template<typename T>
-void mlib::array<T>::print(){
+void Array<T>::print(){
 	std::cout << "[ ";
 	for(index_t i = 0;i < length;i++)
 		std::cout << list[i]
@@ -161,7 +167,7 @@ void mlib::array<T>::print(){
 }
 
 template<typename T>
-void mlib::array<T>::shiftRight(){
+void Array<T>::shiftRight(){
 	T tmp = get(-1);
 	for(unsigned int i = length;i > 0;i--)
 		list[i] = list[i - 1];
@@ -169,24 +175,24 @@ void mlib::array<T>::shiftRight(){
 }
 
 template<typename T>
-void mlib::array<T>::shiftLeft(){
+void Array<T>::shiftLeft(){
 	T tmp = list[0];
 	for(unsigned int i = 0;i < length - 1;i++)
 		list[i] = list[i+1];
 	list[length-1] = tmp;
 }
 template<typename T>
-T mlib::array<T>::begin(){
+T Array<T>::begin(){
 	return get(0);
 }
 
 template<typename T>
-inline T mlib::array<T>::end(){
+inline T Array<T>::end(){
 	return get(-1);
 }
 
 template<typename T>
-inline void mlib::array<T>::strip(T value){
+inline void Array<T>::strip(T value){
 	for(index_t i = 0; i < length;i++){
 		if(list[i] == value){
 			for(index_t j = i;j < length;j++){
@@ -198,7 +204,7 @@ inline void mlib::array<T>::strip(T value){
 }
 
 template<typename T>
-inline void mlib::array<T>::freedup(){
+inline void Array<T>::freedup(){
 	T end_value = end();
 	for(index_t i = 0;i < length;i++)
 		strip(list[i]);
@@ -206,7 +212,7 @@ inline void mlib::array<T>::freedup(){
 
 
 template<typename T>
-inline T mlib::array<T>::pop_front(){
+inline T Array<T>::pop_front(){
 	T tmp = begin();
 	remove_back();
 	return tmp;
@@ -214,23 +220,28 @@ inline T mlib::array<T>::pop_front(){
 
 
 template<typename T>
-inline T mlib::array<T>::pop_back(){
+inline T Array<T>::pop_back(){
 	T tmp = end();
 	remove_front();
 	return tmp;
 }
 
 template<typename T>
-inline void mlib::array<T>::push_front(T value){
+inline void Array<T>::push_front(T value){
 	insert(0,value);
 }
 
 template<typename T>
-inline void mlib::array<T>::push_back(T value){
+inline void Array<T>::push_back(T value){
 	append_back(value);
 }
 
 template<typename T>
-void mlib::array<T>::purge(){
+void Array<T>::purge(){
 	delete[] this->list;
+}
+
+template<typename T>
+bool Array<T>::empty(){
+	return ( length == 0 ) ? true : false;
 }

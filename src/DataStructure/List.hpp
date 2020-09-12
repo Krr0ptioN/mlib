@@ -44,6 +44,7 @@ namespace mlib {
 		void push_front(T value);
 		T pop_front();
 		T pop_back();
+		bool empty();
 		inline T begin();
 		inline T end();
 		index_t search(T value);
