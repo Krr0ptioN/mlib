@@ -1,30 +1,29 @@
 #include <iostream>
 #include "Collection.hpp"
-
-
-#ifndef LIST_HPP
-#define LIST_HPP
+#include "Node.hpp"
+#pragma once
 
 namespace mlib {
+	// Double Linked List Node(DLLNode)
 	template <typename T>
-	
-	class Node {
+	class DLLNode : public mlib::Node<T> {
 	public:
 		T value;
-		Node<T>* next;
-		Node<T>* prev;
-		Node(T value) : value(value) {}
+		DLLNode<T>* next;
+		DLLNode<T>* prev;
+		DLLNode(T value) : value(value), next(nullptr), prev(nullptr)
+		{}
 	};
 
 	template <typename T>
 	class List : public Collection<T> {
 	private:
 		index_t length = 0;
-		Node<T>* head;
-		Node<T>* tail;
+		DLLNode<T>* head;
+		DLLNode<T>* tail;
 
 		T get(index_t index);
-		Node<T>* getNode(index_t index);
+		DLLNode<T>* get_node(index_t index);
 	public:
 		List();
 		~List();
@@ -51,6 +50,6 @@ namespace mlib {
 		T operator[](index_t index);
 	};
 }
+
 #include "List.tpp"
 
-#endif // LIST_HPP

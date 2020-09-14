@@ -1,6 +1,8 @@
 
 #include "List.hpp"
+#include "Node.hpp"
 
+#pragma once
 using namespace mlib;
 
 template<typename T>
@@ -9,7 +11,7 @@ List<T>::List(){}
 template<typename T>
 List<T>::~List(){
 	purge();
-	length = 0;
+    length = 0;
 	head = tail = nullptr;
 }
 
@@ -21,7 +23,7 @@ T List<T>::get(index_t index){
 		else if(index == length - 1)
 			return tail->value;
 		else {
-			Node<T>* node = head;
+			DLLNode<T>* node = head;
 			if(index < 0)
 				index = length + (index - 1);
 			for (int i = 0; i <= index; ++i)
@@ -34,14 +36,14 @@ T List<T>::get(index_t index){
 
 
 template<typename T>
-Node<T>* List<T>::getNode(index_t index){
+DLLNode<T>* List<T>::get_node(index_t index){
 	if (not(index < 0 or index > length)){
 		if(index == 0)
 			return head;
 		else if(index == length - 1)
 			return tail;
 		else {
-			Node<T>* node = head;
+			DLLNode<T>* node = head;
 			if(index < 0)
 				index = length + (index - 1);
 			for (int i = 0; i < index; ++i)
@@ -55,7 +57,7 @@ Node<T>* List<T>::getNode(index_t index){
 template <typename T>
 void List<T>::append_front(T value)
 {
-	Node<T>* node = new Node<T>(value);
+	DLLNode<T>* node = new DLLNode<T>(value);
 	node->next = head;
 	if(head != nullptr)
 		head->prev = node;
@@ -72,7 +74,7 @@ void List<T>::append_back(T value){
 		append_front(value);
 		return;
 	} else {
-		Node<T>* node = new Node<T>(value);
+		DLLNode<T>* node = new DLLNode<T>(value);
 		node->prev = tail;
 		node->next = nullptr;
 		tail->next = node;
@@ -91,9 +93,9 @@ void List<T>::insert(index_t index, T value){
 		else {
 			if(index < 0)
 				index = length + (index - 1);
-			Node<T>* prevNode = getNode(index - 1);
-			Node<T>* nextNode = prevNode->next;
-			Node<T>* node = new Node<T>(value);
+			DLLNode<T>* prevNode = get_node(index - 1);
+			DLLNode<T>* nextNode = prevNode->next;
+			DLLNode<T>* node = new DLLNode<T>(value);
 			node->next = nextNode;
 			node->prev = prevNode;
 			prevNode->next = node;
@@ -107,7 +109,7 @@ template <typename T>
 index_t List<T>::search(T value){
 	if (length != 0){
 		int index = 0;
-		Node<T>* node = head;
+		DLLNode<T>* node = head;
 		while (node->value != value){
 			++index;
 			node = node->next;
@@ -122,7 +124,7 @@ index_t List<T>::search(T value){
 template <typename T>
 void List<T>::remove_front(){
 	if (length != 0){
-		Node<T>* node = head;
+		DLLNode<T>* node = head;
 		head = head->next;
 		head->prev = nullptr;
 		delete node;
@@ -136,8 +138,8 @@ void List<T>::remove_back() {
 		if (length == 1)
 			remove_front();		
 		else {	
-			Node<T>* prevNode = tail->prev;
-			Node<T>* node = tail;
+			DLLNode<T>* prevNode = tail->prev;
+			DLLNode<T>* node = tail;
 			tail = prevNode;
 			tail->next = nullptr;
 			delete node;
@@ -154,9 +156,9 @@ void List<T>::remove(index_t index){
 		else if (index == length - 1)
 			remove_back();
 		else {
-			Node<T>* prevNode = getNode(index - 1);
-			Node<T>* node = prevNode->next;
-			Node<T>* nextNode = node->next;	
+			DLLNode<T>* prevNode = get_node(index - 1);
+			DLLNode<T>* node = prevNode->next;
+			DLLNode<T>* nextNode = node->next;	
 			prevNode->next = nextNode;
 			nextNode->prev = prevNode;
 			delete node;
@@ -210,7 +212,7 @@ template<typename T>
 void List<T>::print(){
 	std::cout << "[ ";
 	if(length != 0){
-		Node<T>* node = head;
+		DLLNode<T>* node = head;
 		for(index_t i = 0;i < length - 1;i++){
 			std::cout << node->value <<  ",";
 			node = node->next;
@@ -245,8 +247,8 @@ void List<T>::freedup(){
 
 template<typename T>
 void List<T>::swap(index_t index_1,index_t index_2){
-	Node<T>* node1 = getNode(index_1);
-	Node<T>* node2 = getNode(index_2);
+	DLLNode<T>* node1 = get_node(index_1);
+	DLLNode<T>* node2 = get_node(index_2);
 	T tmp = node1->value;
 	node1->value = node2->value;
 	node2->value = tmp;
