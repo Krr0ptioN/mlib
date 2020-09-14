@@ -1,36 +1,46 @@
 
 
 #include "Array.hpp"
-
+#pragma once
 using namespace mlib;
 
 template<typename T>
-Array<T>::array(index_t entr_size) : size(entr_size) {
-	list = new T[size];
+Array<T>::Array(index_t _size_t){
+	this->size = _size_t;
+	this->list = new T[_size_t];
 }
 
 template<typename T>
-Array<T>::array(const Array<T> &array2){
-	size = array2.getSize();
+Array<T>::Array(Array<T> &other){
+	size = other.get_size();
 	list = new T[size];
-	for(index_t i = 0; i < array2.length;i++)
-		list[length++] = array2[i];
+	for(index_t i = 0; i < other.length;i++)
+		list[length++] = other[i];
 }
 
+
 template<typename T>
-Array<T>::~array(){
+Array<T>::Array(Array<T> &&other) noexcept {
+	this->list = other.list;
+	this->length = other.get_length();
+	other.list = nullptr;
+	other.length = 0;
+}
+
+
+template<typename T>
+Array<T>::~Array(){
 	purge();
 	this->size = this->length = 0;
-
 }
 
 template<typename T>
-index_t Array<T>::getSize(){
+index_t Array<T>::get_size(){
 	return this->size;
 }
 
 template<typename T>
-index_t Array<T>::getLength(){
+index_t Array<T>::get_length(){
 	return this->length;
 }
 
@@ -52,6 +62,27 @@ T Array<T>::operator[](index_t index){
 }
 
 template<typename T>
+Array<T>& Array<T>::operator=(Array<T>& other)  {
+	delete[] this->list;
+	this->list = new T[other.get_size()];
+	this->length = other.get_length();
+	for(index_t i = 0; i < other.get_length();i++)
+		this->list = other.list[i];
+}
+
+template<typename T>
+Array<T>& Array<T>::operator=(Array<T>&& other) noexcept {
+	if(this != other){
+		delete[] this->list;
+		this->list = other.list;
+		this->length = other.length();
+		other.length = 0;
+		other.list = nullptr;
+	}
+	return *this;
+}
+
+template<typename T>
 void Array<T>::append_back(T value){
 	if (length >= size)
 		resize(1);
@@ -59,14 +90,14 @@ void Array<T>::append_back(T value){
 }
 
 template<typename T>
-void Array<T>::append_back(array& array2){
-	index_t size2 = array2.getSize();
+void Array<T>::append_back(Array<T>& other){
+	index_t size2 = other.get_size();
 	int append_size = size - size2;
 	append_size = abs(append_size);
 	if(append_size != 0)
 		resize(append_size);
 	for(index_t i = length;i < length+size2;i++){
-		list[length++] = array2[i];
+		list[length++] = other[i];
 	}
 }
 
@@ -167,7 +198,7 @@ void Array<T>::print(){
 }
 
 template<typename T>
-void Array<T>::shiftRight(){
+void Array<T>::shift_right(){
 	T tmp = get(-1);
 	for(unsigned int i = length;i > 0;i--)
 		list[i] = list[i - 1];
@@ -175,12 +206,13 @@ void Array<T>::shiftRight(){
 }
 
 template<typename T>
-void Array<T>::shiftLeft(){
+void Array<T>::shift_left(){
 	T tmp = list[0];
 	for(unsigned int i = 0;i < length - 1;i++)
 		list[i] = list[i+1];
 	list[length-1] = tmp;
 }
+
 template<typename T>
 T Array<T>::begin(){
 	return get(0);
