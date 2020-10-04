@@ -1,10 +1,9 @@
 # mlib
 General Perpose Library
 =======
-General purpose library to avoiding DRY(Don't repeat yourself).
 ## Documentation
 -----------------------
-### Installation
+### Installation (not complete)
 ```sh
 make
 sudo make install
@@ -23,18 +22,14 @@ sudo make install
 
 ### TODO
 Data structure:
-- [ ] Linked List
+- [X] Linked List
 - [X] Stack and Queue operation
+- [ ] Tree
+      - Binary Tree
 Exception:
-Compution: 
 Pwntools:
 Random:
 System:
-Process:
 I/O Operations:
 
 
-Other:
-- [X] Object oriented for C Simulation 
-- [ ] print method.
-- [ ] Test for memory corruption.
