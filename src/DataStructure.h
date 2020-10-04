@@ -4,7 +4,7 @@
 
 #ifdef __cplusplus
 	#include "DataStructure/Array.hpp"
-	#include "DataStructure/List.hpp"
+	#include "DataStructure/DoubleLinkedList.hpp"
 #else
 
 #endif // __cplusplus

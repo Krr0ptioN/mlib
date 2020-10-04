@@ -5,5 +5,5 @@ make_lib(){
 }
 
 make_install_lib(){
-        echo "make Library on /usr/lib/"
+    echo "make Library on /usr/lib/"
 }
